@@ -1,0 +1,299 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to top, #0b0f0c, #0d1f1a, #101f17);
+    color: #fff;
+    margin: 0;
+    padding: 40px 20px;
+    transition: filter 0.3s ease;
+}
+
+.blurred {
+    filter: blur(5px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .top-section {
+        flex-direction: row;
+    }
+}
+
+.poster img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+
+.details {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.details h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+.meta {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.meta span {
+    margin-right: 10px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ddd;
+    margin-bottom: 25px;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+form button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background: #1c1c1c;
+    /* dark background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out, transform 0.2s ease;
+    font-weight: 500;
+}
+
+form button:hover {
+    background: #333;
+    transform: scale(1.05);
+}
+
+.trailer-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    background: white;
+    /* white background */
+    color: #1c1c1c;
+    /* dark text */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out, transform 0.2s ease;
+    font-weight: 500;
+}
+
+.trailer-btn:hover {
+    background: #e6e6e6;
+    transform: scale(1.05);
+}
+
+
+a.back-link {
+    color: #aaa;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+a.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    position: relative;
+    background-color: #000;
+    margin: 8% auto;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content iframe {
+    width: 100%;
+    height: 450px;
+    border: none;
+    display: block;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 15;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.spinner.hidden {
+    display: none;
+}
+
+/* Booking flow modal styles */
+.booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.booking-modal-content {
+    position: relative;
+    background-color: #000;
+    margin: 8% auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    animation: slideUp 0.4s ease;
+}
+
+/* style seat layout  */
+.seat-layout {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    padding: 20px;
+    justify-items: center;
+}
+
+/* Seat Buttons */
+.seat-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #0f0; /* Available - Green */
+    border: none;
+    color: #000;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Booked Seats */
+.seat-btn.booked {
+    background-color: #555; /* Booked - Gray */
+    cursor: not-allowed;
+}
+
+/* Selected by User */
+.seat-btn.selected {
+    background-color: #ff0; /* Selected - Yellow */
+}
+
+
+/*Seat Styles (earlier used not going to use till any mistake happen there) */
+/* .seat-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.seat-row {
+    display: flex;
+    gap: 6px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    background-color: #d1d5db;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.seat.selected {
+    background-color: #34d399;
+}
+
+.seat.occupied {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+} */

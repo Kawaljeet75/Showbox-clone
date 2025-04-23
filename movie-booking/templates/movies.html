@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ShowBOX</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/exhome.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+  <header class="hero">
+    <div class="overlay"></div>
+    <nav class="navbar">
+      <div class="logo">ShowBOX</div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/movies">Movies</a></li>
+
+        {% if 'user' in session %}
+        <li><a href="/my-bookings">My Bookings</a></li>
+        <li><a href="/logout">Logout</a></li>
+        {% else %}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+        {% endif %}
+      </ul>
+
+      <div class="search">
+        <form action="{{ url_for('movies') }}" method="get">
+          <input type="text" name="q" placeholder="Search movies..." value="{{ request.args.get('q', '') }}">
+          <i class="bi bi-search"></i>
+        </form>
+      </div>
+
+    </nav>
+    <div class="hero-content">
+      <h1>Trapped in the Grid</h1>
+      <p>Not Everything Is What It Seems</p>
+      <!-- <p>A Theater Experience Like Never Before</p> -->
+      <a class="btn" href="/movies/venom">Book Now</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Now Showing</h2>
+    <div class="divider"></div>
+    <div class="filter-bar">
+      <div class="filter-options">
+        <div class="dropdown">
+          <button class="dropbtn">All formats ▼</button>
+          <div class="dropdown-content">
+            <a href="#">2D</a>
+            <a href="#">3D</a>
+            <a href="#">IMAX</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">By Date ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Today</a>
+            <a href="#">Tomorrow</a>
+            <a href="#">This Weekend</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropbtn">By category ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Action</a>
+            <a href="#">Drama</a>
+            <a href="#">Thriller</a>
+          </div>
+        </div>
+
+        <button class="coming-soon-btn">Coming Soon</button>
+      </div>
+
+      <div class="search">
+        <form action="{{ url_for('movies') }}" method="get">
+          <input type="text" name="q" placeholder="Search movies..." value="{{ request.args.get('q', '') }}">
+          <i class="bi bi-search"></i>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="movie-grid">
+      {% for movie in movies %}
+      <a href="{{ url_for('movie_detail', movie_id=movie['id']) }}">
+        <div class="movie-card">
+          <img loading="lazy" src="{{ url_for('static', filename='images/' ~ movie['poster_url']) }}"
+            alt="{{ movie['title'] }}">
+          <div class="movie-info">
+            <strong>{{ movie['title'] }}</strong><br>
+            <div class="genre">{{ movie['genre'] }}</div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="coming-soon">
+    <h2>Coming Soon</h2>
+    <div class="divider"></div>
+    <div class="movie-coming-list">
+      <div class="movie-card">
+        <img src="{{ url_for('static', filename='images/com1.jpg') }}" alt="Movie Title">
+        <div class="movie-info">
+          <h3>Oppenheimer</h3>
+          <p>Drama | 180 min</p>
+        </div>
+      </div>
+      <div class="movie-card">
+        <img src="{{ url_for('static', filename='images/com2.jpg') }}" alt="Movie Title">
+        <div class="movie-info">
+          <h3>Barbie</h3>
+          <p>Comedy | 110 min</p>
+        </div>
+      </div>
+      <div class="movie-card">
+        <img src="{{ url_for('static', filename='images/com3.jpg') }}" alt="Movie Title">
+        <div class="movie-info">
+          <h3>Killers of the Flower Moon</h3>
+          <p>Thriller | 206 min</p>
+        </div>
+      </div>
+      <div class="movie-card">
+        <img src="{{ url_for('static', filename='images/com4.jpg') }}" alt="Movie Title">
+        <div class="movie-info">
+          <h3>Dune: Part Two</h3>
+          <p>Sci-Fi | 165 min</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-content">
+      <p> &copy; ShowBOX Cinema. All rights reserved.</p>
+      <div class="socials">
+        <a href="#"><img src="{{ url_for('static', filename='icons/fb.png') }}" /></a>
+        <a href="https://instagram.com/kawaljeet_75"><img
+            src="{{ url_for('static', filename='icons/insta.png') }}" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/exhome.js') }}"></script>
+</body>
+
+</html>

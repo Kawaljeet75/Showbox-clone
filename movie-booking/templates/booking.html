@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Tickets - {{ movie.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Movie Header -->
+        <div class="movie-header">
+            <img src="{{ url_for('static', filename='images/' + movie.poster_url) }}" alt="{{ movie.title }}">
+            <div class="movie-details">
+                <h1>{{ movie.title }}</h1>
+                <p><strong>Genre:</strong> {{ movie.genre }}</p>
+                <p><strong>Rating:</strong> ⭐ {{ movie.rating }}</p>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <form action="{{ url_for('book_movie') }}" method="POST" class="booking-form">
+            <input type="hidden" name="movie_id" value="{{ movie.id }}">
+
+            <label>Cinema:</label>
+            <select name="cinema" required>
+                <option value="PVR">PVR</option>
+                <option value="INOX">INOX</option>
+                <option value="Cinepolis">Cinepolis</option>
+            </select><br><br>
+
+            <label>Language:</label>
+            <select name="language" required>
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+            </select><br><br>
+
+            <label>Date:</label>
+            <input type="date" name="date" required><br><br>
+
+            <label>Showtime:</label>
+            <select name="showtime" required>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="7:00 PM">7:00 PM</option>
+            </select><br><br>
+
+
+            <!-- Seat Selection Grid -->
+            <div class="seat-selection">
+                <p><strong>Select Your Seat:</strong></p>
+                <div class="seat-grid">
+                    {% for row in ['A','B','C','D','E'] %}
+                    {% for col in range(1, 11) %}
+                    <label class="seat">
+                        <input type="checkbox" name="seat_number" value="{{ row }}{{ col }}">
+                        {{ row }}{{ col }}
+                    </label>
+                    {% endfor %}
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- <label>Select Seat:</label>
+            <input type="text" name="seat_number" placeholder="e.g. B5" required><br><br> -->
+
+            <button type="submit" class="confirm-btn">Confirm Booking</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+</body>
+
+</html>

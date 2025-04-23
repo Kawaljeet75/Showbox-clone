@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie['title'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/movie_detail.css') }}">
+</head>
+
+<body>
+
+    <a href="{{ url_for('movies') }}" class="back-link">&larr; Back to Movies</a>
+
+    <div class="container" id="mainContent">
+        <div class="top-section">
+            <div class="poster">
+                <img src="{{ url_for('static', filename='images/' ~ movie['poster_url']) }}" alt="{{ movie['title'] }}">
+            </div>
+            <div class="details">
+                <h1>{{ movie['title'] }}</h1>
+                <div class="meta">
+                    <span>{{ movie.get('release_date', 'N/A') }}</span> •
+                    <span>{{ movie.get('age_rating', 'N/A') }}</span> •
+                    <span>{{ movie.get('genre', 'N/A') }}</span> •
+                    <span>{{ movie.get('duration', 'N/A') }}</span> •
+                    <span>{{ movie.get('language', 'N/A') }}</span>
+                </div>
+                <div class="description">
+                    {{ movie['description'] }}
+                </div>
+                <div class="button-group">
+                    <a href="{{ url_for('booking_page', movie_id=movie['id']) }}" class="trailer-btn">🎟️ Book Now</a>
+
+                    {% if movie['trailer_url'] %}
+                    <button class="trailer-btn" data-trailer="{{ movie['embed_url'] }}" onclick="openModal()">▶ Play Trailer</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if movie['trailer_url'] %}
+    <div id="trailerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="spinner" id="spinner"></div>
+            <iframe id="trailerFrame" width="100%" height="450" allowfullscreen onload="hideSpinner()"></iframe>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+
+
+
+    <script src="{{ url_for('static', filename='js/movie_detail.js') }}"></script>
+
+</body>
+
+</html>

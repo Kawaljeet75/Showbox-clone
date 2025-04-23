@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Success</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>✅ Booking Confirmed!</h2>
+        <p>You’ve booked the following seat(s):</p>
+        <ul>
+            {% for seat in seats %}
+                <li>{{ seat }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Cinema:</strong> {{ cinema }}</p>
+        <p><strong>Language:</strong> {{ language }}</p>
+        <p><strong>Date:</strong> {{ date }}</p>
+        <p><strong>Showtime:</strong> {{ showtime }}</p>
+
+        <a href="{{ url_for('movies') }}" class="button">Back to Movies</a>
+    </div>
+</body>
+</html>

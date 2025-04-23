@@ -1,0 +1,114 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0f1115;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    background: #1b1e24;
+    border-radius: 0%;
+    padding: 30px;
+    box-shadow: 0 0 20px #000;
+}
+
+.movie-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.movie-header img {
+    width: 160px;
+    border-radius: 10px;
+}
+
+.movie-details h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #ff4757;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+label {
+    font-weight: 500;
+}
+
+select, input[type="date"] {
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background: #2f3542;
+    color: white;
+}
+
+.seat-selection {
+    margin-top: 20px;
+}
+
+.seat-grid {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.seat {
+    background: #2f3542;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.seat.selected {
+    background-color: #1e90ff;
+    color: white;
+    font-weight: bold;
+}
+
+.seat input[type="radio"] {
+    display: none;
+}
+
+.seat:hover {
+    background: #57606f;
+}
+
+.seat input[type="radio"]:checked + label {
+    background-color: #ff4757;
+    color: #fff;
+}
+
+.confirm-btn {
+    padding: 15px;
+    background: #ff4757;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background: #e84118;
+}
