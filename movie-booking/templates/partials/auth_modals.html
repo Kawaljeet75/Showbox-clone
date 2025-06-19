@@ -1,0 +1,50 @@
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeLoginModal()">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" name="identifier" placeholder="Username or Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <p style="margin-top: 10px;">
+        Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a><br>
+        <p style="text-align: right;"><a href="#" onclick="openForgotPasswordModal()">Forgot password?</a></p>
+      </p>
+      <p id="loginError" style="color: red;"></p>
+    </div>
+  </div>
+  
+  <!-- Sign Up Modal -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeSignupModal()">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p style="margin-top: 10px;">Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+      <p id="signupError" style="color: red;"></p>
+    </div>
+  </div>
+  
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeForgotPasswordModal()">&times;</span>
+      <h2>Reset Password</h2>
+      <form id="forgotPasswordForm">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Send Reset Link</button>
+      </form>
+      <p id="forgotPasswordMessage" style="color: red; margin-top: 10px;"></p>
+    </div>
+  </div>
+
+  <div id="resetPasswordModalWrapper" style="display:none;"></div> 

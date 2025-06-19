@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmation.css') }}">
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-box">
+            <h1> Booking Confirmed!</h1>
+            <p><strong>Movie:</strong> {{ movie.title }}</p>
+            <p><strong>Date:</strong> {{ date }}</p>
+            <p><strong>Time:</strong> {{ time }}</p>
+            <p><strong>Seats:</strong> {{ seats | join(', ') }}</p>
+
+            <a href="{{ url_for('movies') }}" class="back-btn">Back to Movies</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
+</body>
+</html>

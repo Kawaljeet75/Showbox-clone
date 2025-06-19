@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Movies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/allmovies.css') }}">
+</head>
+<body>
+    <!-- <header class="navbar">
+        <div class="navbar-left">
+            <a href="/" class="logo"></a>
+            <nav class="nav-links">
+              <a href="/">Home</a>
+              <a href="/movies">Movies</a>
+              <a href="/mybookings">My Bookings</a>
+              <a href="/contact">Contact</a>
+            </nav>
+          </div>
+        
+          <div class="navbar-right">
+ 
+            <select id="languageFilter" class="filter-dropdown">
+              <option value="">Language</option>
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Korean">Korean</option>
+              <option value="French">French</option>
+              <option value="Japanese">Japanese</option>
+            </select>
+    
+            <select id="genreFilter" class="filter-dropdown">
+              <option value="">Genre</option>
+              <option value="Thriller">Thriller</option>
+              <option value="Drama">Drama</option>
+              <option value="Romance">Romance</option>
+              <option value="Action">Action</option>
+              <option value="Horror">Horror</option>
+            </select>
+        
+            <select id="formatFilter" class="filter-dropdown">
+              <option value="">Format</option>
+              <option value="2D">2D</option>
+              <option value="3D">3D</option>
+              <option value="IMAX">IMAX</option>
+              <option value="4DX">4DX</option>
+            </select>
+          </div> 
+    </header> -->
+    <section class="all-movies-section">
+        <h1 class="title">All Movies</h1>
+        <div class="movie-grid">
+            {% for movie in movies %}
+            <div class="movie-card">
+                <a href="{{ url_for('movie_detail', movie_id=movie['id']) }}">
+                    <img src="{{ url_for('static', filename='images/' ~ movie['poster_url']) }}" alt="{{ movie['title'] }}">
+                    <h2>{{ movie['title'] }}</h2>
+                    <p>{{ movie['genre'] }}</p>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>
+

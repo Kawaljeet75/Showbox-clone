@@ -1,73 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Book Tickets - {{ movie.title }}</title>
+    <title>Book {{ movie.title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
 </head>
+
 <body>
-    <div class="container">
-        <!-- Movie Header -->
-        <div class="movie-header">
-            <img src="{{ url_for('static', filename='images/' + movie.poster_url) }}" alt="{{ movie.title }}">
-            <div class="movie-details">
-                <h1>{{ movie.title }}</h1>
+    <form method="POST" action="{{ url_for('booking_page', movie_id=movie.id) }}" class="book" id="bookingForm">
+        <!-- LEFT PANEL -->
+        <div class="left">
+            <img src="{{ url_for('static', filename='images/' ~ movie.poster_url) }}" alt="{{ movie.title }} Poster">
+            <div class="cont">
+                <h6>{{ movie.title }}</h6>
+                <p><strong>Director:</strong> {{ movie.director }}</p>
+                <p><strong>Starring:</strong> {{ movie.starring }}</p>
                 <p><strong>Genre:</strong> {{ movie.genre }}</p>
-                <p><strong>Rating:</strong> ⭐ {{ movie.rating }}</p>
             </div>
         </div>
 
-        <!-- Booking Form -->
-        <form action="{{ url_for('book_movie') }}" method="POST" class="booking-form">
-            <input type="hidden" name="movie_id" value="{{ movie.id }}">
+        <!-- RIGHT PANEL -->
+        <div class="right">
+            <h1>{{ movie.title }}</h1>
 
-            <label>Cinema:</label>
-            <select name="cinema" required>
-                <option value="PVR">PVR</option>
-                <option value="INOX">INOX</option>
-                <option value="Cinepolis">Cinepolis</option>
-            </select><br><br>
-
-            <label>Language:</label>
-            <select name="language" required>
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-            </select><br><br>
-
-            <label>Date:</label>
-            <input type="date" name="date" required><br><br>
-
-            <label>Showtime:</label>
-            <select name="showtime" required>
-                <option value="10:00 AM">10:00 AM</option>
-                <option value="1:00 PM">1:00 PM</option>
-                <option value="4:00 PM">4:00 PM</option>
-                <option value="7:00 PM">7:00 PM</option>
-            </select><br><br>
-
-
-            <!-- Seat Selection Grid -->
-            <div class="seat-selection">
-                <p><strong>Select Your Seat:</strong></p>
-                <div class="seat-grid">
-                    {% for row in ['A','B','C','D','E'] %}
-                    {% for col in range(1, 11) %}
-                    <label class="seat">
-                        <input type="checkbox" name="seat_number" value="{{ row }}{{ col }}">
-                        {{ row }}{{ col }}
-                    </label>
+            <!-- 1) Date & 2) Showtimes picker -->
+            <div class="picker">
+                <ul class="picker-dates crd">
+                    {% for d in dates %}
+                    <li>
+                        <input type="radio" name="date" id="date-{{ d.value }}" value="{{ d.value }}"
+                            class="visually-hidden" required {% if chosen_date and d.value == chosen_date %}checked{% endif %}>
+                        <label for="date-{{ d.value }}">
+                            <span class="day">{{ d.display_day }}</span>
+                            <span class="date">{{ d.display_date }}</span>
+                        </label>
+                    </li>
                     {% endfor %}
-                    <br>
+                </ul>
+
+                <ul class="picker-times">
+                    {% for t in showtimes %}
+                    <li>
+                        <input type="radio" name="showtime" id="time-{{ loop.index }}" value="{{ t }}"
+                            class="visually-hidden" 
+                            required  
+                            {% if chosen_time and t == chosen_time %}checked{% endif %}
+                            {% if not chosen_date %}disabled{% endif %}>
+                        <label for="time-{{ loop.index }}" class="time-btn">{{ t }}</label>
+                    </li>
                     {% endfor %}
-                </div>
+                </ul>
             </div>
 
-            <!-- <label>Select Seat:</label>
-            <input type="text" name="seat_number" placeholder="e.g. B5" required><br><br> -->
+            <!-- 3) Screen & Seats -->
+            <div class="screen">SCREEN</div>
+            <div class="chair">
+                {% for row in seat_layout %}
+                <ul class="row">
+                    {% for seat in row %}
+                    <li>
+                        <input type="checkbox" name="seats" id="seat-{{ seat.seat_no }}" value="{{ seat.seat_no }}"
+                            class="visually-hidden"
+                            {% if not chosen_time %}disabled{% endif %} 
+                            {% if seat.status == 'taken' %}disabled{% endif %}>
+                        <label for="seat-{{ seat.seat_no }}"
+                            class="seat {{ 'booked' if seat.status=='taken' else '' }}">{{ seat.seat_no }}</label>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
 
-            <button type="submit" class="confirm-btn">Confirm Booking</button>
-        </form>
-    </div>
+            <!-- Legend -->
+            <div class="details">
+                <ul class="details_chair">
+                    <li>Available</li>
+                    <li>Booked</li>
+                    <li>Selected</li>
+                </ul>
+            </div>
+
+            <!-- 4) Proceed -->
+            <button type="submit" class="book_tic" id="proceedBtn" disabled>→</button>
+        </div>
+    </form>
 
     <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
 </body>

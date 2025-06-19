@@ -1,0 +1,87 @@
+/* Reset Password Modal Overlay */
+#resetPasswordModalWrapper {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+/* Modal Content Box */
+#resetPasswordModalWrapper .modal-content {
+    background-color: #1f1f1f;
+    margin: 12% auto;
+    padding: 30px;
+    width: 350px;
+    color: white;
+    border-radius: 12px;
+    border: 1px solid #888;
+    box-shadow: 0 0 15px #000;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Close (X) Button */
+#resetPasswordModalWrapper .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#resetPasswordModalWrapper .close-button:hover {
+    color: #fff;
+}
+
+/* Form Fields */
+#resetPasswordModalWrapper input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    background: #2c2c2c;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* Submit Button */
+#resetPasswordModalWrapper button[type="submit"] {
+    width: 100%;
+    background-color: #e50914;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#resetPasswordModalWrapper button[type="submit"]:hover {
+    background-color: #ff1b25;
+}
+
+/* Feedback Message */
+#resetPasswordModalWrapper #resetPasswordMessage {
+    color: #ff4c4c;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
